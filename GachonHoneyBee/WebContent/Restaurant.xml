@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<restaurant>
+<item>
+<name>포밥</name>
+<where>비전타워 지하2층</where>
+<menu>베트남쌀국수</menu>
+<menu>팟타이</menu>
+<price>6,000</price><!-- 평균가격 -->
+</item>
+<item>
+<name>신의 한컵</name>
+<where>비전타워 지하2층</where>
+<menu>누들</menu>
+<menu>라이스</menu>
+<price>3,500</price><!-- 평균가격 -->
+</item>
+<item>
+<name>쩡이네</name>
+<where>비전타워 지하2층</where>
+<menu>한식</menu>
+<price>5,000</price><!-- 평균가격 -->
+</item>
+<item>
+<name>맘보</name>
+<where>비전타워 지하2층</where>
+<menu>제육철판볶음</menu>
+<menu>낙삼철판볶음</menu>
+<menu>목살김치찌개</menu>
+<price>5,000</price><!-- 평균가격 -->
+</item>
+<item>
+<name>피자투어</name>
+<where>비전타워 지하1층</where>
+<menu>피자</menu>
+<price>6,000</price><!-- 평균가격 -->
+</item>
+<item>
+<name>봉구스 밥버거</name>
+<where>비전타워 지하1층</where>
+<menu>봉구스 밥버거</menu>
+<menu>봉순이 밥버거</menu>
+<price>2,500</price><!-- 평균가격 -->
+</item>
+<item>
+<name>치미치미</name>
+<where>비전타워 지하1층</where>
+<menu>치킨 브리또</menu>
+<menu>소고기 브리또</menu>
+<price>4,000</price><!-- 평균가격 -->
+</item>
+<item>
+<name>오늘오면</name>
+<where>비전타워 지하3층</where>
+<menu>물냉면</menu>
+<menu>잔치국수</menu>
+<price>4,000</price><!-- 평균가격 -->
+</item>
+<item>
+<name>차이나 스푼</name>
+<where>비전타워 지하3층</where>
+<menu>해물짬뽕</menu>
+<menu>짜장면</menu>
+<price>5,500</price><!-- 평균가격 -->
+</item>
+<item>
+<name>토마토 도시락</name>
+<where>프리덤 광장</where>
+<menu>치킨마요덮밥</menu>
+<price>3,500</price><!-- 평균가격 -->
+</item>
+<item>
+<name>오니기리와 이규동</name>
+<where>프리덤 광장</where>
+<menu>규카레동</menu>
+<menu>스팸마요동</menu>
+<price>4,000</price><!-- 평균가격 -->
+</item>
+</restaurant>
