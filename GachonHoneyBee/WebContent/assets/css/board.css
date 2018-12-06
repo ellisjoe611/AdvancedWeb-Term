@@ -1,11 +1,12 @@
 
 /*****************globals*************/
 body {
-  font-family: 'open sans';
+  font-family: 'opensans';
   overflow-x: hidden; }
 
 img {
   max-width: 100%; }
+
 
 .preview {
   display: -webkit-box;

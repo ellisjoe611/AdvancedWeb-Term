@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
 	name="viewport" />
@@ -12,10 +12,24 @@
 <link href="assets/css/material-kit.css?v=2.0.4" rel="stylesheet" />
 
 <!--     Fonts and icons     -->
+<link
+	href="https://fonts.googleapis.com/css?family=Jua&amp;subset=korean"
+	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+<style>
+h5, h4, h1 {
+	font-family: 'Jua', sans-sarif
+}
+
+label{
+font-family:'Jua', sans-sarif;
+color: black;
+}
+</style>
 
 <script type="text/javascript">
 function goReplace(str){
@@ -114,22 +128,25 @@ function goReplace(str){
 	<div class="main main-raised" data-parallax="true">
 		<div class="container">
 			<div class="section text-center" id=study_room>
-				<h2 class="title">"Study Room"</h2>
-				<h5>°¡Ãµ´ëÇÐ±³ ³»¿¡ À¯¿ëÇÑ ½ºÅÍµð·ëµéÀ» ¼Ò°³ÇÕ´Ï´Ù. ´Ù¾çÇÑ °úÀÇ ÇÐ»ýµé°ú ÈÄ±â¸¦ ³ª´­ ¼ö ÀÖ°í, ÆòÁ¡µµ ¸Å±æ
-					¼ö ÀÖ½À´Ï´Ù.</h5>
+				<h2 class="title" style="font-family: 'Jua', sans-sarif">"Study
+					Room"</h2>
+				<h5>ê°€ì²œëŒ€í•™êµ ë‚´ì— ìœ ìš©í•œ ìŠ¤í„°ë””ë£¸ë“¤ì„ ì†Œê°œí•©ë‹ˆë‹¤. ë‹¤ì–‘í•œ ê³¼ì˜ í•™ìƒë“¤ê³¼ í›„ê¸°ë¥¼ ë‚˜ëˆŒ ìˆ˜ ìžˆê³ , í‰ì ë„ ë§¤ê¸¸
+					ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</h5>
+				<a href="StudyRoom_list.html" class="badge badge-pill badge-default"
+					style="width: 100px; height:30px"><label class="text-center" style="margin-top:5px">ë”ë³´ê¸°</label></a>
 				<table align="center">
 					<tr>
 						<td>
-							<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('board.html')">
+							<div class="card" style="width: 20rem; margin-right: 25px;"
+								onclick="goReplace('board.html')">
 								<img class="card-img-top" src="assets/img/ragom.jpg"
 									alt="Card image cap">
 								<div class="card-body">
 									<p class="card-text">
-									<h5>
-										<b>¶ó°õ</b>
-									</h5>
-									°¡Ãµ°ü 1Ãþ ·Îºñ¿¡ À§Ä¡ÇÑ <b>¶ó°õ(Ragom)</b>ÀÔ´Ï´Ù. ÈÞ½ÄÀ» À§ÇÑ ¾Æ´ÁÇÑ ¼îÆÄ¿Í °øºÎ¸¦ À§ÇÑ Æí¾ÈÇÑ
-									Å×ÀÌºí°ú ÀÇÀÚµéÀÌ ³õ¿©ÀÖ½À´Ï´Ù.<br>
+
+										<h5><b>ë¼ê³°</b></h5>
+									ê°€ì²œê´€ 1ì¸µ ë¡œë¹„ì— ìœ„ì¹˜í•œ <b>ë¼ê³°(Ragom)</b>ìž…ë‹ˆë‹¤. íœ´ì‹ì„ ìœ„í•œ ì•„ëŠ‘í•œ ì‡¼íŒŒì™€ ê³µë¶€ë¥¼ ìœ„í•œ íŽ¸ì•ˆí•œ
+									í…Œì´ë¸”ê³¼ ì˜ìžë“¤ì´ ë†“ì—¬ìžˆìŠµë‹ˆë‹¤.<br>
 									</p>
 								</div>
 
@@ -142,10 +159,10 @@ function goReplace(str){
 								<div class="card-body">
 									<p class="card-text">
 									<h5>
-										<b>À¯·¹Ä«</b>
+										<b>ìœ ë ˆì¹´</b>
 									</h5>
-									Áß¾Óµµ¼­°ü 1Ãþ¿¡ À§Ä¡ÇÑ <br> <b>À¯·¹Ä«(Eureka)</b>ÀÔ´Ï´Ù. <br>ÈÞ½ÄÀ» Æ÷ÇÔÇÑ
-									¿©·¯ ½ºÅÍµð °ø°£À¸·Î »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+									ì¤‘ì•™ë„ì„œê´€ 1ì¸µì— ìœ„ì¹˜í•œ <br> <b>ìœ ë ˆì¹´(Eureka)</b>ìž…ë‹ˆë‹¤. <br>íœ´ì‹ì„ í¬í•¨í•œ
+									ì—¬ëŸ¬ ìŠ¤í„°ë”” ê³µê°„ìœ¼ë¡œ ì‚¬ìš©í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
 									</p>
 								</div>
 							</div>
@@ -157,10 +174,10 @@ function goReplace(str){
 								<div class="card-body">
 									<p class="card-text">
 									<h5>
-										<b>±Û·Î¹úÁ¸</b>
+										<b>ê¸€ë¡œë²Œì¡´</b>
 									</h5>
-									ÀüÀÚÁ¤º¸µµ¼­°ü¿¡ À§Ä¡ÇÑ <b>±Û·Î¹úÁ¸(Global-zone)</b>ÀÔ´Ï´Ù. ¿Ü±¹ÀÎµé°ú ´ëÈ­¸¦ ³ª´­ ¼ö ÀÖÀ¸¸ç,
-									¾É¾Æ¼­ ½¯ ¼ö ÀÖ´Â ¼îÆÄµµ ³õ¿©ÀÖ½À´Ï´Ù.
+									ì „ìžì •ë³´ë„ì„œê´€ì— ìœ„ì¹˜í•œ <b>ê¸€ë¡œë²Œì¡´(Global-zone)</b>ìž…ë‹ˆë‹¤. ì™¸êµ­ì¸ë“¤ê³¼ ëŒ€í™”ë¥¼ ë‚˜ëˆŒ ìˆ˜ ìžˆìœ¼ë©°,
+									ì•‰ì•„ì„œ ì‰´ ìˆ˜ ìžˆëŠ” ì‡¼íŒŒë„ ë†“ì—¬ìžˆìŠµë‹ˆë‹¤.
 									</p>
 								</div>
 							</div>
@@ -169,12 +186,13 @@ function goReplace(str){
 				</table>
 			</div>
 			<div class="section text-center" id="restaurant">
-				<h2 class="title">"Restaurant"</h2>
+				<h2 class="title" style="font-family: 'Jua', sans-sarif">"Restaurant"</h2>
 				<h5>
-					°¡Ãµ´ëÇÐ±³ ³»¿¡ ¸ÀÀÖ´Â À½½ÄÁ¡µéÀ» ¼Ò°³ÇÕ´Ï´Ù.<br> ºñÀüÅ¸¿ö ¶Ç´Â °¡Ãµ°ü ÁöÇÏ 1Ãþ¿¡ À§Ä¡ÇÑ À½½ÄÁ¡µéÀÌ¸ç,
-					´Ù¾çÇÑ ÈÄ±â ¶ÇÇÑ »ìÆìº¸½Ç ¼ö ÀÖ½À´Ï´Ù.
+					ê°€ì²œëŒ€í•™êµ ë‚´ì— ë§›ìžˆëŠ” ìŒì‹ì ë“¤ì„ ì†Œê°œí•©ë‹ˆë‹¤.<br> ë¹„ì „íƒ€ì›Œ ë˜ëŠ” ê°€ì²œê´€ ì§€í•˜ 1ì¸µì— ìœ„ì¹˜í•œ ìŒì‹ì ë“¤ì´ë©°,
+					ë‹¤ì–‘í•œ í›„ê¸° ë˜í•œ ì‚´íŽ´ë³´ì‹¤ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
 				</h5>
-				
+				<a href="Restaurant_list.html" class="badge badge-pill badge-default"
+					style="width: 100px; height:30px"><label class="text-center" style="margin-top:5px">ë”ë³´ê¸°</label></a>
 				<table align="center">
 					<tr>
 						<td>
@@ -184,10 +202,10 @@ function goReplace(str){
 								<div class="card-body">
 									<p class="card-text">
 									<h5>
-										<b>½ÅÀÇ ÇÑÄÅ</b>
+										<b>ì‹ ì˜ í•œì»µ</b>
 									</h5>
-									ºñÀüÅ¸¿ö ÁöÇÏ2Ãþ¿¡ À§Ä¡ÇÑ <b>½ÅÀÇ ÇÑÄÅ</b>ÀÔ´Ï´Ù. ÁÖ ¸Þ´º·Î´Â ¸ÅÄÞÇÑ ¶óÀÌ½º¿Í ´©µéÀÌ ÀÖ½À´Ï´Ù.°¡°ÝÀº
-									3500¿ø~6000¿ø ¼±À¸·Î Àú·ÅÇÑ ÆíÀÔ´Ï´Ù.
+									ë¹„ì „íƒ€ì›Œ ì§€í•˜2ì¸µì— ìœ„ì¹˜í•œ <b>ì‹ ì˜ í•œì»µ</b>ìž…ë‹ˆë‹¤. ì£¼ ë©”ë‰´ë¡œëŠ” ë§¤ì½¤í•œ ë¼ì´ìŠ¤ì™€ ëˆ„ë“¤ì´ ìžˆìŠµë‹ˆë‹¤.ê°€ê²©ì€
+									3500ì›~6000ì› ì„ ìœ¼ë¡œ ì €ë ´í•œ íŽ¸ìž…ë‹ˆë‹¤.
 									</p>
 								</div>
 							</div>
@@ -199,10 +217,10 @@ function goReplace(str){
 								<div class="card-body">
 									<p class="card-text">
 									<h5>
-										<b>ºÀ±¸½º</b>
+										<b>ë´‰êµ¬ìŠ¤</b>
 									</h5>
-									ºñÀüÅ¸¿ö ÁöÇÏ1Ãþ¿¡ À§Ä¡ÇÑ <b>ºÀ±¸½º</b>ÀÔ´Ï´Ù.¹ä¹ö°ÅÀÇ ´Ù¾çÇÑ ¸ÀÀ» °í¸¦ ¼ö ÀÖ½À´Ï´Ù. °¡°ÝÀº
-									3500¿ø~5000¿ø ¼±À¸·Î Àú·ÅÇÑ ÆíÀÔ´Ï´Ù
+									ë¹„ì „íƒ€ì›Œ ì§€í•˜1ì¸µì— ìœ„ì¹˜í•œ <b>ë´‰êµ¬ìŠ¤</b>ìž…ë‹ˆë‹¤.ë°¥ë²„ê±°ì˜ ë‹¤ì–‘í•œ ë§›ì„ ê³ ë¥¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤. ê°€ê²©ì€
+									3500ì›~5000ì› ì„ ìœ¼ë¡œ ì €ë ´í•œ íŽ¸ìž…ë‹ˆë‹¤
 									</p>
 								</div>
 							</div>
@@ -214,10 +232,10 @@ function goReplace(str){
 								<div class="card-body">
 									<p class="card-text">
 									<h5>
-										<b>Åä¸¶Åä µµ½Ã¶ô</b>
+										<b>í† ë§ˆí†  ë„ì‹œë½</b>
 									</h5>
-									ºñÀüÅ¸¿ö ÁöÇÏ3Ãþ¿¡ À§Ä¡ÇÑ<br> <b>Åä¸¶Åäµµ½Ã¶ô</b>ÀÔ´Ï´Ù.ÁÖµÈ ¸Þ´º´Â µµ½Ã¶ô µî ¹ä Á¾·ùÀÌ¸ç °¡°ÝÀº
-									4000¿ø~6000¿ø ¼±ÀÔ´Ï´Ù.
+									ë¹„ì „íƒ€ì›Œ ì§€í•˜3ì¸µì— ìœ„ì¹˜í•œ<br> <b>í† ë§ˆí† ë„ì‹œë½</b>ìž…ë‹ˆë‹¤.ì£¼ëœ ë©”ë‰´ëŠ” ë„ì‹œë½ ë“± ë°¥ ì¢…ë¥˜ì´ë©°
+									ê°€ê²©ì€ 4000ì›~6000ì› ì„ ìž…ë‹ˆë‹¤.
 									</p>
 								</div>
 							</div>
@@ -227,9 +245,10 @@ function goReplace(str){
 			</div>
 		</div>
 		<div class="section text-center" id="school_food">
-			<h2 class="title">"School food"</h2>
-			<h5>
-				°¡Ãµ´ëÇÐ±³ÀÇ ÇÐ½ÄµéÀ» ¼Ò°³ÇÕ´Ï´Ù.<br> ºñÀüÅ¸¿ö, Ã¢Á¶°ü µîÀÇ ¿À´ÃÀÇ ÇÐ½ÄÀ» »ìÆìº¼ ¼ö ÀÖ½À´Ï´Ù.
+			<h2 class="title" style="font-family: 'Jua', sans-sarif">"School
+				food"</h2>
+			<h5 style="font-family: 'Jua', sans-sarif">
+				ê°€ì²œëŒ€í•™êµì˜ í•™ì‹ë“¤ì„ ì†Œê°œí•©ë‹ˆë‹¤.<br> ë¹„ì „íƒ€ì›Œ, ì°½ì¡°ê´€ ë“±ì˜ ì˜¤ëŠ˜ì˜ í•™ì‹ì„ ì‚´íŽ´ë³¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
 			</h5>
 			<table align="center">
 				<tr>
@@ -240,9 +259,9 @@ function goReplace(str){
 							<div class="card-body">
 								<p class="card-text">
 								<h5>
-									<b>ºñÀüÅ¸¿ö</b>
+									<b>ë¹„ì „íƒ€ì›Œ</b>
 								</h5>
-								<b>ºñÀüÅ¸¿ö</b>ÇÐ½Ä ÀÔ´Ï´Ù.
+								<b>ë¹„ì „íƒ€ì›Œ</b>í•™ì‹ ìž…ë‹ˆë‹¤.
 								</p>
 							</div>
 						</div>
@@ -253,9 +272,9 @@ function goReplace(str){
 							<div class="card-body">
 								<p class="card-text">
 								<h5>
-									<b>Ã¢Á¶°ü</b>
+									<b>ì°½ì¡°ê´€</b>
 								</h5>
-								<b>Ã¢Á¶°ü</b>ÇÐ½ÄÀÔ´Ï´Ù.
+								<b>ì°½ì¡°ê´€</b>í•™ì‹ìž…ë‹ˆë‹¤.
 								</p>
 							</div>
 						</div>
@@ -267,9 +286,9 @@ function goReplace(str){
 							<div class="card-body">
 								<p class="card-text">
 								<h5>
-									<b>¾Æ¸§°ü</b>
+									<b>ì•„ë¦„ê´€</b>
 								</h5>
-								<b>¾Æ¸§°ü</b>ÇÐ½ÄÀÔ´Ï´Ù.
+								<b>ì•„ë¦„ê´€</b>í•™ì‹ìž…ë‹ˆë‹¤.
 								</p>
 							</div>
 						</div>
