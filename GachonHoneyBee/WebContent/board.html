@@ -1,15 +1,15 @@
 
 <!DOCTYPE html>
 <html>
-
+<head>
+<meta charset="UTF-8">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-<head>
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
@@ -57,8 +57,7 @@
 							<a class="navbar-brand" href="index.html">Gachon Honey BEE</a>
 							<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 								<li class="nav-item active"><a class="nav-link"
-									href="index.html">Home <span class="sr-only">(current)</span>
-								</a></li>
+									href="index.html">Home </a></li>
 								<li class="nav-item"><a class="nav-link" href="#study_room">Study
 										Room</a></li>
 								<li class="nav-item"><a class="nav-link disabled"
@@ -95,21 +94,10 @@
 
 							<div class="preview-pic tab-content">
 								<div class="tab-pane active" id="pic-1">
-									<img src="assets/img/ragom.jpg" />
-								</div>
-								<div class="tab-pane" id="pic-2">
-									<img src="assets/img/ragom.jpg" />
-								</div>
-								<div class="tab-pane" id="pic-3">
-									<img src="assets/img/ragom.jpg" />
-								</div>
-								<div class="tab-pane" id="pic-4">
-									<img src="assets/img/ragom.jpg" />
-								</div>
-								<div class="tab-pane" id="pic-5">
-									<img src="assets/img/ragom.jpg" />
+									<img src="assets/img/ragom.jpg" id="picture" />
 								</div>
 							</div>
+							
 							<ul class="preview-thumbnail nav nav-tabs">
 								<li class="active"><a data-target="#pic-1"
 									data-toggle="tab"><img src="assets/img/ragom.jpg" /></a></li>
@@ -125,7 +113,7 @@
 
 						</div>
 						<div class="details col-md-6">
-							<h2 class="product-title">¶ó°õ(Ragom)</h2>
+							<h2 class="product-title" id="name">ë¼ê³°(Ragom)</h2>
 							<div class="rating">
 								<div class="stars">
 									<span class="fa fa-star checked"></span> <span
@@ -135,19 +123,19 @@
 								</div>
 								<span class="review-no">41 reviews</span>
 							</div>
-							<p class="product-description">°¡Ãµ°ü 1Ãş ·Îºñ¿¡ À§Ä¡ÇÑ ½ºÅÍµğ·ë,
-								¶ó°õ(Ragom)ÀÔ´Ï´Ù!</p>
-							<h4 class="price">
-								ÀÌ¿ëÁ¶°Ç: <span>´©±¸³ª°¡´É!</span>
-							</h4>
-							<p class="vote">
-								Æí¾ÈÇÏ°í ¾Æ´ÁÇÑ ºĞÀ§±â·Î, <br>ÄÜ¼¾Æ®°¡ ÀÚ¸®ÇÑ Å×ÀÌºí°ú ¾Æ´ÁÇÑ ¼îÆÄµéÀ» »ç¿ëÇÒ ¼ö ÀÖ´Â °ø°£ÀÔ´Ï´Ù.
+							<p class="product-description" id="where">ê°€ì²œê´€ 1ì¸µ ë¡œë¹„ì— ìœ„ì¹˜í•œ
+								ìŠ¤í„°ë””ë£¸, ë¼ê³°(Ragom)ì…ë‹ˆë‹¤!</p>
+							<h4 class="price" id="condition"></h4>
+							<p class="vote" id="description">
+								í¸ì•ˆí•˜ê³  ì•„ëŠ‘í•œ ë¶„ìœ„ê¸°ë¡œ, <br>ì½˜ì„¼íŠ¸ê°€ ìë¦¬í•œ í…Œì´ë¸”ê³¼ ì•„ëŠ‘í•œ ì‡¼íŒŒë“¤ì„ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ê³µê°„ì…ë‹ˆë‹¤.
 							</p>
 							<h5 class="sizes">
-								open: <span class="size" data-toggle="tooltip" title="¿ÀÀü10½Ã">10:00AM</span>
+								open: <span class="size" data-toggle="tooltip" title="ì˜¤ì „10ì‹œ"
+									id="open">10:00AM</span>
 							</h5>
 							<h5 class="colors">
-								close: <span class="size" data-toggle="tooltip" title="¿ÀÈÄ7½Ã">7:00PM</span>
+								close: <span class="size" data-toggle="tooltip" title="ì˜¤í›„7ì‹œ"
+									id="close">7:00PM</span>
 							</h5>
 							<div class="action">
 								<button class="add-to-cart btn btn-info" type="button"
@@ -163,13 +151,63 @@
 
 		</div>
 
+		<script>
+			var xmlhttp = new XMLHttpRequest();
+			var url= "data.json";
+			var temp ="";
+			var flag = "";
+			var type="";
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var arr = JSON.parse(xmlhttp.responseText);
+					temp = $(location).attr('search').slice($(location).attr('search').indexOf('=')+1);
+					flag = temp.substring(0,1);
+					type = temp.slice($(location).attr('search').indexOf('&type='));
+					
+					if(type == "study")
+					showData(arr.studyroom);
+					
+					if(type == "restaurant")
+					showData(arr.restaurant);
+				}
+			}
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();		
+			
+			function showData(arr) {
+				var name = "", where = "", condition="",description="",open="",close="",image="";
+			
+				name = arr[flag].name;
+				where = arr[flag].where;
+				condition = arr[flag].condition;
+				description = arr[flag].description;
+				open = arr[flag].open;
+				close = arr[flag].close;
+				image = arr[flag].image;
+
+				document.getElementById("name").innerText = name;
+				document.getElementById("where").innerText = where;
+				document.getElementById("condition").innerText = condition;
+				document.getElementById("description").innerText = description;
+				document.getElementById("open").innerText = open;
+				document.getElementById("close").innerText = close;
+				document.getElementById("picture").src = image;
+				//document.getElementById("pic1").innerText = image;
+			}
+
+		</script>
+
 		<div class="sub_title">
-		<table align="center"><tr>
-		<td><img src="assets/img/star.png" style="width:30px; height:30px; margin-top:13px"></td>
-		<td>
-			<h2 align="center">
-				<b>»ç¿ëÈÄ±â</b>
-			</h2></td>
+			<table align="center">
+				<tr>
+					<td><img src="assets/img/star.png"
+						style="width: 30px; height: 30px; margin-top: 13px"></td>
+					<td>
+						<h2 align="center">
+							<b>ì‚¬ìš©í›„ê¸°</b>
+						</h2>
+					</td>
 			</table>
 		</div>
 		<div class="row">
