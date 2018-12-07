@@ -34,19 +34,7 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-          <li class="dropdown nav-item">
-            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <i class="material-icons">apps</i> Menu
-            </a>
-            <div class="dropdown-menu dropdown-with-icons">
-              <a href="index.html" class="dropdown-item">
-                All Components
-              </a>
-              <a href="https://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
-                Documentation
-              </a>
-            </div>
-          </li>
+          
           <li class="dropdown nav-item">
             <a href="#pablo" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown">
               <div class="profile-photo-small">
@@ -54,10 +42,10 @@
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <h6 class="dropdown-header">Dropdown header</h6>
-                <a href="profiel.html" class="dropdown-item">Profile</a>
-                <a href="#pablo" class="dropdown-item">Settings and other stuff</a>
-                <a href="#pablo" class="dropdown-item">Sign out</a>
+              <h6 class="dropdown-header">사용자 메뉴</h6>
+                <a href="edit_account.html" class="dropdown-item">회원정보 수정</a>
+                <a href="#pablo" class="dropdown-item">탈퇴하기...</a>
+                <a href="logout.html" class="dropdown-item">로그아웃</a>
             </div>
           </li>
         </ul>
@@ -77,31 +65,31 @@
                 <img src="assets/img/faces/christian.jpg" alt="Circle Image" class="img-raised rounded-circle img-fluid">
               </div>
               <div class="name">
-                <h3 class="title">name</h3>
-                <h6>User's Account Information</h6>
+                <h3 class="title" id="nameTitle"></h3>
+                <h4>User Account Info</h4>
               </div>
             </div>
           </div>
         </div>
         <div class="description text-center">
           <div class="tim-typo">
-              <h3 class="title" id="nameView">
-                <span class="tim-note">Name</span>The Life of Material Kit</h3>
+              <h1 class="tim-note">Name</h1>
+              <h3 class="title" id="nameView"></h3>
           </div>
           <div class="tim-typo">
-              <h3 class="title" id="emailView">
-                <span class="tim-note">E-mail</span>The Life of Material Kit</h3>
+              <h1 class="tim-note">E-mail</h1>
+              <h3 class="title" id="emailView"></h3>
           </div>
           <div class="tim-typo">
-              <h3 class="title" id="birthdayView">
-                <span class="tim-note">Birth Date</span>The Life of Material Kit</h3>
+              <h1 class="tim-note">Birth Day</h1>
+              <h3 class="title" id="birthdayView"></h3>
           </div>
         </div>
         
       </div>
     </div>
     <center>
-    	<button type="button" class="btn" data-toggle="tooltip" data-placement="bottom" title="" data-container="body" data-original-title="Edit Account" href="edit_account.html">Edit Account</button>
+    	
     </center>
   </div>
 
@@ -140,8 +128,7 @@
   <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
   <script src="assets/js/material-kit.js?v=2.0.4" type="text/javascript"></script>
 
-  <!--Firebase-->
-
+<!--Firebase-->
 <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -175,16 +162,17 @@
           firebaseDatabase.ref("users/" + user.uid).once('value').then(function (snapshot) {
             
             //자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
+            document.getElementById("nameTitle").textContent = snapshot.val().name;
             document.getElementById("nameView").textContent = snapshot.val().name;
             document.getElementById("emailView").textContent = snapshot.val().email;
             document.getElementById("birthdayView").textContent = snapshot.val().birthday;
 
-            name = snapshot.val().name;   //유저 닉네임은 계속 쓸거기 때문에 전역변수로 할당
-            loginUserKey = snapshot.key;  //로그인한 유저의 key도 계속 쓸 것이기 때문에 전역변수로 할당
-            userInfo = snapshot.val(); //snapshot.val()에 user 테이블에 있는 해당 개체 정보가 넘어온다. userInfo에 대입!
+            //name = snapshot.val().name;   //유저 닉네임은 계속 쓸거기 때문에 전역변수로 할당
+            //loginUserKey = snapshot.key;  //로그인한 유저의 key도 계속 쓸 것이기 때문에 전역변수로 할당
+            //userInfo = snapshot.val(); //snapshot.val()에 user 테이블에 있는 해당 개체 정보가 넘어온다. userInfo에 대입!
             
 
-            //alert(userInfo.userid);  //uid는 db에서 user 테이블의 각 개체들의 pk 인데, 이 값은 인증에서 생성된 아이디의 pk 값과 같다. *중요!
+            alert(userInfo.userid);  //uid는 db에서 user 테이블의 각 개체들의 pk 인데, 이 값은 인증에서 생성된 아이디의 pk 값과 같다. *중요!
 
             return true;
           });

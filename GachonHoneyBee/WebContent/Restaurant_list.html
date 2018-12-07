@@ -47,6 +47,60 @@ function goReplace(flag,type){
 </head>
 
 <body>
+	<!--get session form Firebase-->
+	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+	<script>
+  		// Initialize Firebase
+  		var config = {
+    		apiKey: "AIzaSyAKsZQ8RnJ-8Ax_yJ8iqUVqMaapAhYwjv8",
+    		authDomain: "gachon-honey-bee.firebaseapp.com",
+    		databaseURL: "https://gachon-honey-bee.firebaseio.com",
+    		projectId: "gachon-honey-bee",
+    		storageBucket: "gachon-honey-bee.appspot.com",
+    		messagingSenderId: "946258217070"
+  		};
+  		firebase.initializeApp(config);
+  		firebaseEmailAuth = firebase.auth();
+  		firebaseDatabase = firebase.database();
+
+  		var userId;
+  		//세션 체크 함수 시작하기!
+    	userSessionCheck();
+
+
+    	//유저가 로그인 했는지 안했는지 확인해주는 함수
+    	function userSessionCheck() {
+      
+      		//로그인이 되어있으면 - 유저가 있으면, user를 인자값으로 넘겨준다.
+      		firebaseEmailAuth.onAuthStateChanged(function (user) {
+        		if(user) {
+          			//조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+          			userId = firebaseEmailAuth.currentUser.uid;
+          			firebaseDatabase.ref("/users/" + userId).once('value').then(function (snapshot) {
+          				//자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
+            			document.getElementById("profileMain").textContent = snapshot.val().name + "님 환영합니다!";
+            			document.getElementById("profileMenu1").textContent = "회원정보 확인";
+            			document.getElementById("profileMenu1").href = "profile.html";
+            			document.getElementById("profileMenu2").textContent = "로그아웃";
+            			document.getElementById("profileMenu2").href = "logout.html";
+            
+            			alert(userInfo.userid);  //uid는 db에서 user 테이블의 각 개체들의 pk 인데, 이 값은 인증에서 생성된 아이디의 pk 값과 같다. *중요!
+            			return true
+          			});
+
+        		}
+        		else {
+        			document.getElementById("profileMain").textContent = "로그인 & 회원가입"
+            		document.getElementById("profileMenu1").textContent = "로그인";
+            		document.getElementById("profileMenu1").href = "login.html";
+            		document.getElementById("profileMenu2").textContent = "회원가입";
+            		document.getElementById("profileMenu2").href = "create_account.html";
+             		return false
+        		}
+      		});
+    	}
+
+	</script>
 	<nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
 		<div class="container">
 			<div class="navbar-translate">
@@ -82,11 +136,11 @@ function goReplace(flag,type){
         					<ul class="navbar-nav ml-auto">
           						<li class="dropdown nav-item">
             						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" id="profileMain">
-              							<i class="material-icons">apps</i> Not Signed-In!
+              							
             						</a>
             						<div class="dropdown-menu dropdown-with-icons">
-              							<a href="login.html" class="dropdown-item" id="profileMenu1">Sign in</a>
-              							<a href="create_account.html" class="dropdown-item" id="profileMenu2">Create Account</a>
+              							<a href="" class="dropdown-item" id="profileMenu1"></a>
+              							<a href="" class="dropdown-item" id="profileMenu2"></a>
             						</div>
           						</li>
           

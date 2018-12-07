@@ -188,6 +188,7 @@ $(document).ready(function(){
     var email = $('#email').val();
     var password = $('#password').val();
     var passwordForCheck = $('#passwordForCheck').val();
+    var userInfo;
 
     if(name == "" || birthday == "" || email == "" || password == "" || passwordForCheck == ""){
       alert("사용자 정보를 모두 입력해주세요!");
@@ -197,9 +198,9 @@ $(document).ready(function(){
     }
     else{
       //이메일로 가입 버튼 눌렀을 때 작동되는 함수 - firebase 인증 모듈
-      firebaseEmailAuth.createUserWithEmailAndPassword(email, password).then(function(user) {
+      firebaseEmailAuth.createUserWithEmailAndPassword(email, password).then(function(data) {
     
-        userInfo = user; //가입 후 callBack 함수로 생성된 유저의 정보가 user에 담겨서 넘어온다. 전역변수에 할당.
+        userInfo = data.user; //가입 후 callBack 함수로 생성된 유저의 정보가 user에 담겨서 넘어온다. 전역변수에 할당.
 
         //성공했을 때 작동되는 함수
         logUser(); 
@@ -214,7 +215,7 @@ $(document).ready(function(){
 
       //가입 성공했을 때 호출 되는 함수 - 위의 firebase의 인증 모듈과 다른 database 모듈임을 확인하자.
     function logUser(){
-      var ref = firebaseDatabase.ref("users/"+userInfo.email); //저장될 곳을 users라는 부모 키를 레퍼런스로 지정.
+      var ref = firebaseDatabase.ref("users/"+userInfo.uid); //저장될 곳을 users라는 부모 키를 레퍼런스로 지정.
     
       //저장 형식
       var obj = {
