@@ -21,6 +21,18 @@
 	rel="stylesheet">
 <link href="assets/css/one-page-wonder.min.css" rel="stylesheet">
 
+<!-- CSS Files -->
+<link href="assets/css/material-kit.css?v=2.0.4" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="https://fonts.googleapis.com/css?family=Jua&amp;subset=korean"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+
 <style>
 	hr { 
  	   display: block;
@@ -32,6 +44,17 @@
   	  border-width: 1px;
 	} 
 </style>
+<style>
+h5, h4, h1 {
+	font-family: 'Jua', sans-sarif
+}
+
+label{
+font-family:'Jua', sans-sarif;
+color: black;
+}
+</style>
+
 <script type="text/javascript">
 function goReplace(flag,type){	
 	location.href='board.html?flag='+flag+'&type='+type;
@@ -40,23 +63,65 @@ function goReplace(flag,type){
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+	<nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
 		<div class="container">
-			<a class="navbar-brand" href="#">Gachon Honey Bee</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="create_account.html">Sign Up</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="login.html">Log In</a></li>
-				</ul>
+			<div class="navbar-translate">
+				<a class="navbar-brand" href="index.html"> Gachon Honey BEE </a>
+
+				<nav class="navbar fixed-top navbar-light bg-warning">
+					<div class="container">
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#navbarTogglerDemo01"
+							aria-controls="navbarTogglerDemo01" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-bar navbar-kebab"></span> <span
+								class="navbar-toggler-bar navbar-kebab"></span> <span
+								class="navbar-toggler-bar navbar-kebab"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+							<a class="navbar-brand" href="index.html">Gachon Honey BEE</a>
+							<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+								<li class="nav-item">
+									<a class="nav-link disabled" href="index.html">Home
+									</a>
+								</li>
+								<li class="nav-item active">
+									<a class="nav-link" href="">Study Room <span class="sr-only">(current)</span>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link disabled" href="Restaurant_list.html">Restaurant
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link disabled" href="SchoolFood_index.html">School food
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<!-- login or out based on firebase -->
+						<div class="collapse navbar-collapse">
+        					<ul class="navbar-nav ml-auto">
+          						<li class="dropdown nav-item">
+            						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" id="profileMain">
+              							<i class="material-icons">apps</i> Not Signed-In!
+            						</a>
+            						<div class="dropdown-menu dropdown-with-icons">
+              							<a href="login.html" class="dropdown-item" id="profileMenu1">Sign in</a>
+              							<a href="create_account.html" class="dropdown-item" id="profileMenu2">Create Account</a>
+            						</div>
+          						</li>
+          
+        					</ul>
+      					</div>
+
+					</div>
+				</nav>
 			</div>
 		</div>
 	</nav>
+
 	<header class="masthead text-center text-white">
 		<div class="masthead-content">
 			<div class="container">

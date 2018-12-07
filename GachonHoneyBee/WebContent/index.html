@@ -40,8 +40,7 @@ function goReplace(flag,type){
 </head>
 
 <body>
-	<nav
-		class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
+	<nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
 		<div class="container">
 			<div class="navbar-translate">
 				<a class="navbar-brand" href="index.html"> Gachon Honey BEE </a>
@@ -62,15 +61,31 @@ function goReplace(flag,type){
 								<li class="nav-item active"><a class="nav-link"
 									href="index.html">Home <span class="sr-only">(current)</span>
 								</a></li>
-								<li class="nav-item"><a class="nav-link" href="#study_room">Study
+								<li class="nav-item"><a class="nav-link" href="StudyRoom_list.html">Study
 										Room</a></li>
 								<li class="nav-item"><a class="nav-link disabled"
 									href="Restaurant_list.html">Restaurant</a></li>
 								<li class="nav-item"><a class="nav-link disabled"
-									href="#school_food">School food</a></li>
+									href="SchoolFood_index.html">School food</a></li>
 							</ul>
-
 						</div>
+
+						<!-- login or out based on firebase -->
+						<div class="collapse navbar-collapse">
+        					<ul class="navbar-nav ml-auto">
+          						<li class="dropdown nav-item">
+            						<a id="profileMain" href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+              							<i class="material-icons">apps</i> Not Signed-In!
+            						</a>
+            						<div class="dropdown-menu dropdown-with-icons">
+              							<a id="profileMenu1" href="login.html" class="dropdown-item">Sign in</a>
+              							<a id="profileMenu2" href="create_account.html" class="dropdown-item">Create Account</a>
+            						</div>
+          						</li>
+          
+        					</ul>
+      					</div>
+
 					</div>
 				</nav>
 			</div>
@@ -339,4 +354,57 @@ function goReplace(flag,type){
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
 	<!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
 	<script src="assets/js/material-kit.js?v=2.0.4" type="text/javascript"></script>
+
+	<!--get session form Firebase-->
+	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+	<script>
+  		// Initialize Firebase
+  		var config = {
+    		apiKey: "AIzaSyAKsZQ8RnJ-8Ax_yJ8iqUVqMaapAhYwjv8",
+    		authDomain: "gachon-honey-bee.firebaseapp.com",
+    		databaseURL: "https://gachon-honey-bee.firebaseio.com",
+    		projectId: "gachon-honey-bee",
+    		storageBucket: "gachon-honey-bee.appspot.com",
+    		messagingSenderId: "946258217070"
+  		};
+  		firebase.initializeApp(config);
+  		firebaseEmailAuth = firebase.auth();
+  		firebaseDatabase = firebase.database();
+
+  		//세션 체크 함수 시작하기!
+    	userSessionCheck();
+
+
+    	//유저가 로그인 했는지 안했는지 확인해주는 함수
+    	function userSessionCheck() {
+      
+      		//로그인이 되어있으면 - 유저가 있으면, user를 인자값으로 넘겨준다.
+      		firebaseEmailAuth.onAuthStateChanged(function (user) {
+        		if(user) {
+          			//조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+          			firebaseDatabase.ref("users/" + user.email).once('value').then(function (snapshot) {
+          				//자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
+            			document.getElementById("profileMain").textContent = "환영합니다! " + "님";
+            			document.getElementById("profileMenu1").textContent = "Check profile";
+            			document.getElementById("profileMenu1").href = "profile.html";
+            			document.getElementById("profileMenu2").textContent = "Sign out";
+            			document.getElementById("profileMenu2").href = "logout.html";
+
+            			name = snapshot.val().name;   //유저 닉네임은 계속 쓸거기 때문에 전역변수로 할당
+            			loginUserKey = snapshot.key;  //로그인한 유저의 key도 계속 쓸 것이기 때문에 전역변수로 할당
+            			userInfo = snapshot.val(); //snapshot.val()에 user 테이블에 있는 해당 개체 정보가 넘어온다. userInfo에 대입!
+            
+            			//alert(userInfo.userid);  //uid는 db에서 user 테이블의 각 개체들의 pk 인데, 이 값은 인증에서 생성된 아이디의 pk 값과 같다. *중요!
+            			return true
+          			});
+
+        		}
+        		else {
+             		//$('#comment').val("로그인 하시면 사람들의 감사 리스트를 보실 수 있습니다. 로그인 해주실꺼죠^^?");
+             		return false
+        		}
+      		});
+    	}
+
+	</script>
 </html>

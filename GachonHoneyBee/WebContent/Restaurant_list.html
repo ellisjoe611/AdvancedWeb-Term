@@ -47,8 +47,7 @@ function goReplace(flag,type){
 </head>
 
 <body>
-	<nav
-		class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
+	<nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
 		<div class="container">
 			<div class="navbar-translate">
 				<a class="navbar-brand" href="index.html"> Gachon Honey BEE </a>
@@ -73,10 +72,26 @@ function goReplace(flag,type){
 								<li class="nav-item active"><a class="nav-link disabled"
 									href="Restaurant_list.html">Restaurant<span class="sr-only">(current)</span></a></li>
 								<li class="nav-item"><a class="nav-link disabled"
-									href="#school_food">School food</a></li>
+									href="Schoolfood_index.html">School food</a></li>
 							</ul>
 
 						</div>
+
+						<!-- login or out based on firebase -->
+						<div class="collapse navbar-collapse">
+        					<ul class="navbar-nav ml-auto">
+          						<li class="dropdown nav-item">
+            						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" id="profileMain">
+              							<i class="material-icons">apps</i> Not Signed-In!
+            						</a>
+            						<div class="dropdown-menu dropdown-with-icons">
+              							<a href="login.html" class="dropdown-item" id="profileMenu1">Sign in</a>
+              							<a href="create_account.html" class="dropdown-item" id="profileMenu2">Create Account</a>
+            						</div>
+          						</li>
+          
+        					</ul>
+      					</div>
 					</div>
 				</nav>
 			</div>
