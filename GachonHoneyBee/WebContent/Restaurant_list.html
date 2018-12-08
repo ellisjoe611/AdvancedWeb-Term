@@ -14,10 +14,12 @@
 
 <!-- CSS Files -->
 <link href="assets/css/material-kit.css?v=2.0.4" rel="stylesheet" />
-<link href="assets/css/board.css"/>
+<link href="assets/css/board.css" />
 
 <!--     Fonts and icons     -->
-<link href="https://fonts.googleapis.com/css?family=Jua&amp;subset=korean" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Jua&amp;subset=korean"
+	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet"
@@ -34,19 +36,79 @@ hr {
 	border-width: 1px;
 }
 
-h5,body {
-font-family: 'Jua',sans-sarif;
+h5, body {
+	font-family: 'Jua', sans-sarif;
 }
 </style>
 
 <script type="text/javascript">
-function goReplace(flag,type){	
-	location.href='board.html?flag='+flag+'&type='+type;
-}
+	function goReplace(flag, type) {
+		location.href = 'board.html?flag=' + flag + '&type=' + type;
+	}
 </script>
 </head>
 
 <body>
+	<!--get session form Firebase-->
+	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey : "AIzaSyAKsZQ8RnJ-8Ax_yJ8iqUVqMaapAhYwjv8",
+			authDomain : "gachon-honey-bee.firebaseapp.com",
+			databaseURL : "https://gachon-honey-bee.firebaseio.com",
+			projectId : "gachon-honey-bee",
+			storageBucket : "gachon-honey-bee.appspot.com",
+			messagingSenderId : "946258217070"
+		};
+		firebase.initializeApp(config);
+		firebaseEmailAuth = firebase.auth();
+		firebaseDatabase = firebase.database();
+		var userId;
+		//세션 체크 함수 시작하기!
+		userSessionCheck();
+		//유저가 로그인 했는지 안했는지 확인해주는 함수
+		function userSessionCheck() {
+
+			//로그인이 되어있으면 - 유저가 있으면, user를 인자값으로 넘겨준다.
+			firebaseEmailAuth
+					.onAuthStateChanged(function(user) {
+						if (user) {
+							//조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+							userId = firebaseEmailAuth.currentUser.uid;
+							firebaseDatabase
+									.ref("/users/" + userId)
+									.once('value')
+									.then(
+											function(snapshot) {
+												//자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
+												document
+														.getElementById("profileMain").textContent = snapshot
+														.val().name
+														+ "님 환영합니다!";
+												document
+														.getElementById("profileMenu1").textContent = "회원정보 확인";
+												document
+														.getElementById("profileMenu1").href = "profile.html";
+												document
+														.getElementById("profileMenu2").textContent = "로그아웃";
+												document
+														.getElementById("profileMenu2").href = "logout.html";
+
+												alert(userInfo.userid); //uid는 db에서 user 테이블의 각 개체들의 pk 인데, 이 값은 인증에서 생성된 아이디의 pk 값과 같다. *중요!
+												return true
+											});
+						} else {
+							document.getElementById("profileMain").textContent = "로그인 & 회원가입"
+							document.getElementById("profileMenu1").textContent = "로그인";
+							document.getElementById("profileMenu1").href = "login.html";
+							document.getElementById("profileMenu2").textContent = "회원가입";
+							document.getElementById("profileMenu2").href = "create_account.html";
+							return false
+						}
+					});
+		}
+	</script>
 	<nav
 		class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
 		<div class="container">
@@ -77,6 +139,18 @@ function goReplace(flag,type){
 							</ul>
 
 						</div>
+						<!-- login or out based on firebase -->
+						<div class="collapse navbar-collapse">
+							<ul class="navbar-nav ml-auto">
+								<li class="dropdown nav-item"><a id="profileMain" href="#"
+									class="dropdown-toggle nav-link" data-toggle="dropdown"> </a>
+									<div class="dropdown-menu dropdown-with-icons">
+										<a id="profileMenu1" href="" class="dropdown-item">Sign in</a>
+										<a id="profileMenu2" href="" class="dropdown-item">Create
+											Account</a>
+									</div></li>
+							</ul>
+						</div>
 					</div>
 				</nav>
 			</div>
@@ -89,10 +163,12 @@ function goReplace(flag,type){
 			<div class="row">
 				<div class="col-md-8 ml-auto mr-auto">
 					<div class="brand text-center">
-						<h1>" List of <b>Restaurant</b> "</h1><br>
-												<img src="assets/img/restaurant.png"
+						<h1>
+							" List of <b>Restaurant</b> "
+						</h1>
+						<br> <img src="assets/img/restaurant.png"
 							style="width: 120px; height: 120px">
-							<h5>Restaurant</h5>
+						<h5>Restaurant</h5>
 					</div>
 
 				</div>
@@ -102,15 +178,15 @@ function goReplace(flag,type){
 	<div class="main main-raised" data-parallax="true">
 		<!-- Page Content -->
 		<div class="container">
-			<br>
-			<br>
-			<br>
+			<br> <br> <br>
 			<!-- Related Projects Row -->
-			<h2 class="title text-center" style="font-family: 'Jua', sans-sarif;">비전타워 지하 1층</h2>
+			<h2 class="title text-center" style="font-family: 'Jua', sans-sarif;">비전타워
+				지하 1층</h2>
 			<table style="margin-left: auto; margin-right: auto">
 				<tr>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('3','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('3','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_pizzatour.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
@@ -126,14 +202,15 @@ function goReplace(flag,type){
 						</div>
 					</td>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('1','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('1','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_bongus.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
 							<div class="card-body">
 								<p class="card-text">
 								<h5 class="text-center">
-									<b >봉구스 밥버거</b>
+									<b>봉구스 밥버거</b>
 								</h5>
 								<b>위치 : </b>비전타워 지하1층<br> <b>주메뉴 : </b>봉순이 밥버거<br> <b>평균가격
 									: </b>2,500 원 ~
@@ -142,7 +219,8 @@ function goReplace(flag,type){
 						</div>
 					</td>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('4','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('4','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_chimi.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
@@ -160,13 +238,15 @@ function goReplace(flag,type){
 				</tr>
 			</table>
 			<hr>
-			<h2 class="title text-center" style="font-family: 'Jua', sans-sarif;">비전타워 지하 2층</h2>
+			<h2 class="title text-center" style="font-family: 'Jua', sans-sarif;">비전타워
+				지하 2층</h2>
 			<table align="center">
 				<br>
 				<br>
 				<tr>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('5','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('5','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_phobob.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
@@ -182,7 +262,8 @@ function goReplace(flag,type){
 						</div>
 					</td>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('0','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('0','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_sincup.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
@@ -198,7 +279,8 @@ function goReplace(flag,type){
 						</div>
 					</td>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('6','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('6','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_jjeong.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
@@ -217,7 +299,8 @@ function goReplace(flag,type){
 
 				<tr>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('7','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('7','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_mambo.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
@@ -235,11 +318,13 @@ function goReplace(flag,type){
 				</tr>
 			</table>
 			<hr>
-			<h2 class="title text-center" style="font-family: 'Jua', sans-sarif;">비전타워 지하 3층</h2>
+			<h2 class="title text-center" style="font-family: 'Jua', sans-sarif;">비전타워
+				지하 3층</h2>
 			<table align="center">
 				<tr>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('8','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('8','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_omyeon.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
@@ -255,7 +340,8 @@ function goReplace(flag,type){
 						</div>
 					</td>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('10','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('10','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_chinaspoon.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
@@ -273,13 +359,15 @@ function goReplace(flag,type){
 				</tr>
 			</table>
 			<hr>
-			<h2 class="title text-center" style="font-family: 'Jua', sans-sarif;">프리덤 광장 (비전타워 3층 가천대역 입구 옆)</h2>
+			<h2 class="title text-center" style="font-family: 'Jua', sans-sarif;">프리덤
+				광장 (비전타워 3층 가천대역 입구 옆)</h2>
 			<table align="center">
 				<br>
 				<br>
 				<tr>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('2','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('2','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_tomato.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
@@ -295,7 +383,8 @@ function goReplace(flag,type){
 						</div>
 					</td>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('9','restaurant')">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							onclick="goReplace('9','restaurant')">
 							<img class="card-img-top" src="assets/img/Res_igyudong.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
 								style="cursor: pointer;">
@@ -329,7 +418,7 @@ function goReplace(flag,type){
 		<!-- /.container -->
 	</footer>
 
-<!--   Core JS Files   -->
+	<!--   Core JS Files   -->
 	<script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
 	<script src="assets/js/core/popper.min.js" type="text/javascript"></script>
 	<script src="assets/js/core/bootstrap-material-design.min.js"
