@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+	name="viewport" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>Welcome to Gachon Honey Bee!</title>
+
+<!-- CSS Files -->
+<link href="assets/css/material-kit.css?v=2.0.4" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+	href="https://fonts.googleapis.com/css?family=Jua&amp;subset=korean"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+<style>
+h5, h4, h1 {
+	font-family: 'Jua', sans-sarif
+}
+
+label{
+font-family:'Jua', sans-sarif;
+color: black;
+}
+</style>
+
+<script type="text/javascript">
+function goReplace(flag,type){	
+	location.href='board.html?flag='+flag+'&type='+type;
+}
+</script>
+
+</head>
+
+<body>
+	<!--get session form Firebase-->
+	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+	<script>
+  		// Initialize Firebase
+  		var config = {
+    		apiKey: "AIzaSyAKsZQ8RnJ-8Ax_yJ8iqUVqMaapAhYwjv8",
+    		authDomain: "gachon-honey-bee.firebaseapp.com",
+    		databaseURL: "https://gachon-honey-bee.firebaseio.com",
+    		projectId: "gachon-honey-bee",
+    		storageBucket: "gachon-honey-bee.appspot.com",
+    		messagingSenderId: "946258217070"
+  		};
+  		firebase.initializeApp(config);
+  		firebaseEmailAuth = firebase.auth();
+
+  		firebaseEmailAuth.signOut().then(function() {
+           	alert("로그아웃 되었습니다")
+            
+            //메인 페이지로 이동시키고 세션 저장시키기
+            window.location.href = "index.html"
+                 
+        }).catch(function(error) {
+        	if(error){
+                alert("로그아웃 실패");
+        	}
+		});
+
+  	</script>
+
+</body>

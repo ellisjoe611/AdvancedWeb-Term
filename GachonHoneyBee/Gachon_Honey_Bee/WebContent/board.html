@@ -1,0 +1,642 @@
+<!doctype html>
+<html>
+<head>
+<meta charset=utf-8>
+<meta name=description content="">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<title>Welcome Gachon Honey Bee!</title>
+
+<!-- Styles -->
+<link rel="stylesheet" type="text/css"
+   href="assets/css/jquery-comments.css">
+<link rel="stylesheet" type="text/css"
+   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+<!-- Data -->
+<script type="text/javascript" src="assets/data/comments-data.js"></script>
+
+<!-- Libraries -->
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
+<script type="text/javascript" src="assets/js/jquery-comments.js"></script>
+<link
+   href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+   rel="stylesheet" id="bootstrap-css"> <script
+   src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link
+   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+   rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700"
+   rel="stylesheet">
+
+<!-- CSS Files -->
+<link href="assets/css/material-kit.css?v=2.0.4" rel="stylesheet" />
+<link href="assets/css/board.css" rel="stylesheet" />
+<link href="assets/css/comment.css" rel="stylesheet" />
+
+<!--     Fonts and icons     -->
+<link
+   href="https://fonts.googleapis.com/css?family=Jua&amp;subset=korean"
+   rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<!-- Init jquery-comments --> <script
+   src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+   
+<style type="text/css">
+body, h1, h2, h3, h4 , h5, h6, span{
+   font-family: 'Jua', sans-sarif
+}
+
+a {
+   color: #000;
+}
+
+.mask {
+   width: 100%;
+   height: 100%;
+   position: fixed;
+   left: 0;
+   top: 0;
+   z-index: 10;
+   background: #000;
+   opacity: .5;
+   filter: alpha(opacity = 50);
+}
+
+#modalLayer {
+   display: none;
+   position: relative;
+}
+
+#modalLayer .modalContent {
+   width: 440px;
+   height: 200px;
+   padding: 20px;
+   border: 1px solid #ccc;
+   position: fixed;
+   left: 50%;
+   top: 40%;
+   z-index: 11;
+   background: #fff;
+}
+
+#modalLayer .modalContent button {
+   background: #1AAB8A;
+   color: #fff;
+   border: none;
+   position: relative;
+   height: 60px;
+   font-size: 1.6em;
+   padding: 0 2em;
+   cursor: pointer;
+   transition: 800ms ease all;
+   outline: none;
+}
+
+#modalLayer .modalContent button:hover {
+   background: #fff;
+   color: #1AAB8A;
+}
+
+#modalLayer .modalContent button:before, #modalLayer .modalContent button:after
+   {
+   content: '';
+   position: absolute;
+   top: 0;
+   right: 0;
+   height: 2px;
+   width: 0;
+   background: #1AAB8A;
+   transition: 400ms ease all;
+}
+
+#modalLayer .modalContent button:after {
+   right: inherit;
+   top: inherit;
+   left: 0;
+   bottom: 0;
+}
+
+#modalLayer .modalContent button:hover:before, button:hover:after {
+   width: 100%;
+   transition: 800ms ease all;
+}
+
+.starR {
+   background:
+      url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+      no-repeat right 0;
+   background-size: auto 100%;
+   width: 30px;
+   height: 30px;
+   display: inline-block;
+   text-indent: -9999px;
+   cursor: pointer;
+}
+
+.starR.on {
+   background-position: 0 0;
+}
+
+.star-input>.input, .star-input>.input>label:hover, .star-input>.input>input:focus+label,
+   .star-input>.input>input:checked+label {
+   display: inline-block;
+   vertical-align: middle;
+   background: url('assets/img/grade_img.png') no-repeat;
+}
+
+.star-input {
+   display: inline-block;
+   white-space: nowrap;
+   width: 225px;
+   height: 40px;
+   padding: 25px;
+   line-height: 30px;
+}
+
+.star-input>.input {
+   display: inline-block;
+   width: 150px;
+   background-size: 150px;
+   height: 28px;
+   white-space: nowrap;
+   overflow: hidden;
+   position: relative;
+}
+
+.star-input>.input>input {
+   position: absolute;
+   width: 1px;
+   height: 1px;
+   opacity: 0;
+}
+
+star-input>.input.focus {
+   outline: 1px dotted #ddd;
+}
+
+.star-input>.input>label {
+   width: 30px;
+   height: 0;
+   padding: 28px 0 0 0;
+   overflow: hidden;
+   float: left;
+   cursor: pointer;
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+
+.star-input>.input>label:hover, .star-input>.input>input:focus+label,
+   .star-input>.input>input:checked+label {
+   background-size: 150px;
+   background-position: 0 bottom;
+}
+
+.star-input>.input>label:hover ~label {
+   background-image: none;
+}
+
+.star-input>.input>label[for="p1"] {
+   width: 30px;
+   z-index: 5;
+}
+
+.star-input>.input>label[for="p2"] {
+   width: 60px;
+   z-index: 4;
+}
+
+.star-input>.input>label[for="p3"] {
+   width: 90px;
+   z-index: 3;
+}
+
+.star-input>.input>label[for="p4"] {
+   width: 120px;
+   z-index: 2;
+}
+
+.star-input>.input>label[for="p5"] {
+   width: 150px;
+   z-index: 1;
+}
+
+.star-input>output {
+   display: inline-block;
+   width: 60px;
+   font-size: 18px;
+   text-align: right;
+   vertical-align: middle;
+}
+</style>
+<script type="text/javascript">
+   var result;
+   $(document).ready(function() {
+      var modalLayer = $("#modalLayer");
+      var modalLink = $(".modalLink");
+      var modalCont = $(".modalContent");
+      var marginLeft = modalCont.outerWidth() / 2;
+      var marginTop = modalCont.outerHeight() / 2;
+
+      modalLink.click(function() {
+         modalLayer.fadeIn("slow");
+         modalCont.css({
+            "margin-top" : -marginTop,
+            "margin-left" : -marginLeft
+         });
+         $(this).blur();
+         $(".modalContent > a").focus();
+         return false;
+      });
+
+      $(".modalContent > button").click(function() {
+         modalLayer.fadeOut("slow");
+         modalLink.focus();
+      });
+   });
+   var starRating = function() {
+      var $star = $(".star-input"), $result = $star.find("output>b");
+
+      $(document).on("focusin", ".star-input>.input", function() {
+         $(this).addClass("focus");
+      })
+
+      .on("focusout", ".star-input>.input", function() {
+         var $this = $(this);
+         setTimeout(function() {
+            if ($this.find(":focus").length === 0) {
+               $this.removeClass("focus");
+            }
+         }, 100);
+      })
+
+      .on("change", ".star-input :radio", function() {
+         $result.text($(this).next().text());
+      }).on("mouseover", ".star-input label", function() {
+         $result.text($(this).text());
+      }).on("mouseleave", ".star-input>.input", function() {
+         var $checked = $star.find(":checked");
+         if ($checked.length === 0) {
+            $result.text("0");
+         } else {
+            $result.text($checked.next().text());
+         }
+      });
+   };
+   starRating();
+</script> <script>
+   var userId;
+   $(function() {
+      var userInfo;
+      var config = {
+         apiKey : "AIzaSyAKsZQ8RnJ-8Ax_yJ8iqUVqMaapAhYwjv8",
+         authDomain : "gachon-honey-bee.firebaseapp.com",
+         databaseURL : "https://gachon-honey-bee.firebaseio.com",
+         projectId : "gachon-honey-bee",
+         storageBucket : "gachon-honey-bee.appspot.com",
+         messagingSenderId : "946258217070"
+      };
+      firebase.initializeApp(config);
+      firebaseEmailAuth = firebase.auth();
+      firebaseDatabase = firebase.database();
+      //세션 체크 함수 시작하기!
+      userSessionCheck();
+      //유저가 로그인 했는지 안했는지 확인해주는 함수
+      var saveComment = function(data) {
+         // Convert pings to human readable format
+         $(data.pings).each(
+               function(index, id) {
+                  var user = usersArray.filter(function(user) {
+                     return user.id == id
+                  })[0];
+                  data.content = data.content.replace('@' + id, '@'
+                        + user.fullname);
+               });
+         return data;
+      }
+      $('#comments-container')
+            .comments(
+                  {
+                     profilePictureURL : 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
+                     currentUserId : 1,
+                     roundProfilePictures : true,
+                     textareaRows : 1,
+                     enableAttachments : true,
+                     enableHashtags : true,
+                     enablePinging : true,
+                     getUsers : function(success, error) {
+                        setTimeout(function() {
+                           success(usersArray);
+                        }, 500);
+                     },
+                     getComments : function(success, error) {
+                        setTimeout(function() {
+                           success(commentsArray);
+                        }, 500);
+                     },
+                     postComment : function(data, success, error) {
+                        setTimeout(function() {
+                           success(saveComment(data));
+                           userId = firebaseEmailAuth.currentUser.uid;
+                           firebase.database().ref("/users/" + userId)
+                                 .push({
+                                    Comment : data
+                                 });
+
+                        }, 500);
+                     },
+                     putComment : function(data, success, error) {
+                        setTimeout(function() {
+                           success(saveComment(data));
+                        }, 500);
+                     },
+                     deleteComment : function(data, success, error) {
+                        setTimeout(function() {
+                           success();
+                        }, 500);
+                     },
+                     upvoteComment : function(data, success, error) {
+                        setTimeout(function() {
+                           success(data);
+                        }, 500);
+                     },
+                     uploadAttachments : function(dataArray, success,
+                           error) {
+                        setTimeout(function() {
+                           success(dataArray);
+                        }, 500);
+                     },
+                  });
+   });
+   function userSessionCheck() {
+      //로그인이 되어있으면 - 유저가 있으면, user를 인자값으로 넘겨준다.
+      firebaseEmailAuth
+            .onAuthStateChanged(function(user) {
+               if (user) {
+                  //조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+                  userId = firebaseEmailAuth.currentUser.uid;
+                  firebaseDatabase
+                        .ref("/users/" + userId)
+                        .once('value')
+                        .then(
+                              function(snapshot) {
+                                 //자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
+                                 document
+                                       .getElementById("profileMain").textContent = snapshot
+                                       .val().name;
+                                 +"님 환영합니다!";
+                                 document
+                                       .getElementById("profileMenu1").textContent = "회원정보 확인";
+                                 document
+                                       .getElementById("profileMenu1").href = "profile.html";
+                                 document
+                                       .getElementById("profileMenu2").textContent = "로그아웃";
+                                 document
+                                       .getElementById("profileMenu2").href = "logout.html";
+
+                                 alert(userInfo.userid); //uid는 db에서 user 테이블의 각 개체들의 pk 인데, 이 값은 인증에서 생성된 아이디의 pk 값과 같다. *중요!
+                                 return true
+                              });
+               } else {
+                  document.getElementById("profileMain").textContent = "로그인 & 회원가입"
+                  document.getElementById("profileMenu1").textContent = "로그인";
+                  document.getElementById("profileMenu1").href = "login.html";
+                  document.getElementById("profileMenu2").textContent = "회원가입";
+                  document.getElementById("profileMenu2").href = "create_account.html";
+                  return false
+               }
+            });
+   }
+</script>
+</head>
+<body>
+   <nav
+      class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
+      <div class="container">
+         <div class="navbar-translate">
+            <a class="navbar-brand" href="index.html"> Gachon Honey BEE </a>
+
+            <nav class="navbar fixed-top navbar-light bg-warning">
+               <div class="container">
+                  <button class="navbar-toggler" type="button"
+                     data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                     aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                     aria-label="Toggle navigation">
+                     <span class="navbar-toggler-bar navbar-kebab"></span> <span
+                        class="navbar-toggler-bar navbar-kebab"></span> <span
+                        class="navbar-toggler-bar navbar-kebab"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                     <a class="navbar-brand" href="index.html">Gachon Honey BEE</a>
+                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active"><a class="nav-link"
+                           href="index.html">Home </a></li>
+                        <li class="nav-item"><a class="nav-link" href="#study_room">Study
+                              Room</a></li>
+                        <li class="nav-item"><a class="nav-link disabled"
+                           href="Restaurant_list.html">Restaurant</a></li>
+                        <li class="nav-item"><a class="nav-link disabled"
+                           href="#school_food">School food</a></li>
+                     </ul>
+                  </div>
+                  <!-- login or out based on firebase -->
+                  <div class="collapse navbar-collapse">
+                     <ul class="navbar-nav ml-auto">
+                        <li class="dropdown nav-item"><a href="#"
+                           class="dropdown-toggle nav-link" data-toggle="dropdown"
+                           id="profileMain"> <i class="material-icons">apps</i> Not
+                              Signed-In!
+                        </a>
+                           <div class="dropdown-menu dropdown-with-icons">
+                              <a href="login.html" class="dropdown-item" id="profileMenu1">Sign
+                                 in</a> <a href="create_account.html" class="dropdown-item"
+                                 id="profileMenu2">Create Account</a>
+                           </div></li>
+
+                     </ul>
+                  </div>
+               </div>
+            </nav>
+         </div>
+      </div>
+   </nav>
+
+   <div class="page-header header-filter" data-parallax="true"
+      style="background-image: url('assets/img/background.jpg'); height: 300px">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+               <div class="brand text-center">
+                  <h1>REVIEW BOARD</h1>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="main main-raised" data-parallax="true">
+      <br> <br>
+      <div class="container">
+         <div class="card">
+            <div class="container-fliud">
+               <div class="wrapper row">
+                  <div class="preview col-md-6">
+
+                     <div class="preview-pic tab-content">
+                        <div class="tab-pane active" id="pic-1">
+                           <img src="assets/img/ragom.jpg" id="picture" />
+                        </div>
+                        <div class="tab-pane" id="pic-2">
+                           <img src="assets/img/ragom.jpg" id="picture3" />
+                        </div>
+                        <div class="tab-pane" id="pic-3">
+                           <img src="assets/img/ragom.jpg" id="picture5" />
+                        </div>
+                     </div>
+                     <ul class="preview-thumbnail nav nav-tabs">
+                        <li class="active"><a data-target="#pic-1"
+                           data-toggle="tab"><img src="assets/img/ragom.jpg"
+                              id="picture2" /></a></li>
+                        <li><a data-target="#pic-2" data-toggle="tab"><img
+                              src="assets/img/ragom.jpg" id="picture4" /></a></li>
+                        <li><a data-target="#pic-3" data-toggle="tab"><img
+                              src="assets/img/ragom.jpg" id="picture6" /></a></li>
+                     </ul>
+
+                  </div>
+                  <div class="details col-md-6">
+                     <h1 class="product-title" id="name">라곰(Ragom)</h1>
+                     <div class="rating">
+                        <a href="#modalLayer" class="modalLink">
+                           <div class="starRev">
+                              <span class="starR on">별1</span> <span class="starR">별2</span>
+                              <span class="starR">별3</span> <span class="starR">별4</span> <span
+                                 class="starR">별5</span>
+                           </div>
+                        </a> <span class="review-no">41 reviews</span>
+                     </div>
+                     <div id="modalLayer">
+                        <div class="modalContent">
+                           <h1>별점으로 평가를 해주세요!</h1>
+                           <span class="star-input"> <span class="input"> <input
+                                 type="radio" name="star-input" value="1" id="p1"> <label
+                                 for="p1">1</label> <input type="radio" name="star-input"
+                                 value="2" id="p2"> <label for="p2">2</label> <input
+                                 type="radio" name="star-input" value="3" id="p3"> <label
+                                 for="p3">3</label> <input type="radio" name="star-input"
+                                 value="4" id="p4"> <label for="p4">4</label> <input
+                                 type="radio" name="star-input" value="5" id="p5"> <label
+                                 for="p5">5</label>
+                           </span>
+                           </span>
+
+                           <button type="button">닫기</button>
+                        </div>
+
+                        <span class="review-no">41 reviews</span>
+                     </div>
+                     <p class="product-description" id="where">가천관 1층 로비에 위치한
+                        스터디룸, 라곰(Ragom)입니다!</p>
+                     <h3 class="price"><span id="condition"><b></b></span></h3>
+                     <p class="vote" id="description">
+                        편안하고 아늑한 분위기로, <br>콘센트가 자리한 테이블과 아늑한 쇼파들을 사용할 수 있는 공간입니다.
+                     </p>
+                     <h5 class="sizes">
+                        open: <span class="size" data-toggle="tooltip" title="오전10시"
+                           id="open">10:00AM</span>
+                     </h5>
+                     <h5 class="colors">
+                        close: <span class="size" data-toggle="tooltip" title="오후7시"
+                           id="close">7:00PM</span>
+                     </h5>
+                     <div class="action">
+                        <button class="add-to-cart btn btn-info" type="button"
+                           style="width: 80px">show list</button>
+                        <button class="like btn btn-danger" type="button">
+                           <span class="fa fa-heart"></span>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+
+      <script>
+         var xmlhttp = new XMLHttpRequest();
+         var url = "data.json";
+         var temp = "";
+         var flag = "";
+         var type = "";
+
+         xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+               var arr = JSON.parse(xmlhttp.responseText);
+               temp = $(location).attr('search').slice(
+                     $(location).attr('search').indexOf('=') + 1);
+               flag = temp.substring(0, 1);
+               type = temp.slice($(location).attr('search').indexOf(
+                     '&type='));
+
+               if (type == "study")
+                  showData(arr.studyroom);
+
+               if (type == "restaurant")
+                  showData(arr.restaurant);
+            }
+         }
+         xmlhttp.open("GET", url, true);
+         xmlhttp.send();
+
+         function showData(arr) {
+            var name = "", where = "", condition = "", description = "", open = "", close = "", image = "", image2 = "", image3 = "";
+
+            name = arr[flag].name;
+            where = arr[flag].where;
+            condition = arr[flag].condition;
+            description = arr[flag].description;
+            open = arr[flag].open;
+            close = arr[flag].close;
+            image = arr[flag].image;
+            image2 = arr[flag].image2;
+            image3 = arr[flag].image3;
+
+            document.getElementById("name").innerText = name;
+            document.getElementById("where").innerText = where;
+            document.getElementById("condition").innerText = condition;
+            document.getElementById("description").innerText = description;
+            document.getElementById("open").innerText = open;
+            document.getElementById("close").innerText = close;
+            document.getElementById("picture").src = image;
+            document.getElementById("picture2").src = image;
+            document.getElementById("picture3").src = image2;
+            document.getElementById("picture4").src = image2;
+            document.getElementById("picture5").src = image3;
+            document.getElementById("picture6").src = image3;
+            //document.getElementById("pic1").innerText = image;
+         }
+      </script>
+
+      <div class="sub_title">
+         <table align="center">
+            <tr>
+               <td><img src="assets/img/star.png"
+                  style="width: 30px; height: 30px; margin-top: 13px"></td>
+               <td>
+                  <h2 align="center">
+                     <b>사용후기</b>
+                  </h2>
+               </td>
+         </table>
+         <div id="comments-container"></div>
+      </div>
+   </div>
+</body>
+</html>
