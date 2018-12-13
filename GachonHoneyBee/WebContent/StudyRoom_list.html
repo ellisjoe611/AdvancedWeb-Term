@@ -31,34 +31,34 @@
 <link rel="stylesheet" type="text/css"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
 <style>
-	hr { 
- 	   display: block;
- 	   margin-top: 0.5em;
- 	   margin-bottom: 0.5em;
- 	   margin-left: auto;
- 	   margin-right: auto;
- 	   border-style: inset;
-  	  border-width: 1px;
-	} 
+hr {
+	display: block;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: inset;
+	border-width: 1px;
+}
 </style>
 <style>
 h5, h4, h1 {
 	font-family: 'Jua', sans-sarif
 }
 
-label{
-font-family:'Jua', sans-sarif;
-color: black;
+label {
+	font-family: 'Jua', sans-sarif;
+	color: black;
 }
 </style>
 
 <script type="text/javascript">
-function goReplace(flag,type){	
-	location.href='board.html?flag='+flag+'&type='+type;
-}
+	function goReplace(flag, type) {
+		location.href = 'board.html?flag=' + flag + '&type=' + type;
+	}
 </script>
 </head>
 
@@ -66,61 +66,70 @@ function goReplace(flag,type){
 	<!--get session form Firebase-->
 	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 	<script>
-  		// Initialize Firebase
-  		var config = {
-    		apiKey: "AIzaSyAKsZQ8RnJ-8Ax_yJ8iqUVqMaapAhYwjv8",
-    		authDomain: "gachon-honey-bee.firebaseapp.com",
-    		databaseURL: "https://gachon-honey-bee.firebaseio.com",
-    		projectId: "gachon-honey-bee",
-    		storageBucket: "gachon-honey-bee.appspot.com",
-    		messagingSenderId: "946258217070"
-  		};
-  		firebase.initializeApp(config);
-  		firebaseEmailAuth = firebase.auth();
-  		firebaseDatabase = firebase.database();
+		// Initialize Firebase
+		var config = {
+			apiKey : "AIzaSyAKsZQ8RnJ-8Ax_yJ8iqUVqMaapAhYwjv8",
+			authDomain : "gachon-honey-bee.firebaseapp.com",
+			databaseURL : "https://gachon-honey-bee.firebaseio.com",
+			projectId : "gachon-honey-bee",
+			storageBucket : "gachon-honey-bee.appspot.com",
+			messagingSenderId : "946258217070"
+		};
+		firebase.initializeApp(config);
+		firebaseEmailAuth = firebase.auth();
+		firebaseDatabase = firebase.database();
 
-  		var userId;
-  		//세션 체크 함수 시작하기!
-    	userSessionCheck();
+		var userId;
+		//세션 체크 함수 시작하기!
+		userSessionCheck();
 
+		//유저가 로그인 했는지 안했는지 확인해주는 함수
+		function userSessionCheck() {
 
-    	//유저가 로그인 했는지 안했는지 확인해주는 함수
-    	function userSessionCheck() {
-      
-      		//로그인이 되어있으면 - 유저가 있으면, user를 인자값으로 넘겨준다.
-      		firebaseEmailAuth.onAuthStateChanged(function (user) {
-        		if(user) {
-          			//조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
-          			userId = firebaseEmailAuth.currentUser.uid;
-          			firebaseDatabase.ref("/users/" + userId).once('value').then(function (snapshot) {
-          				//자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
-            			document.getElementById("profileMain").textContent = snapshot.val().name + "님 환영합니다!";
-            			document.getElementById("profileMenu1").textContent = "회원정보 확인";
-            			document.getElementById("profileMenu1").href = "profile.html";
-            			document.getElementById("profileMenu2").textContent = "로그아웃";
-            			document.getElementById("profileMenu2").href = "logout.html";
-            
-            			return true
-          			});
+			//로그인이 되어있으면 - 유저가 있으면, user를 인자값으로 넘겨준다.
+			firebaseEmailAuth
+					.onAuthStateChanged(function(user) {
+						if (user) {
+							//조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+							userId = firebaseEmailAuth.currentUser.uid;
+							firebaseDatabase
+									.ref("/users/" + userId)
+									.once('value')
+									.then(
+											function(snapshot) {
+												//자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
+												document
+														.getElementById("profileMain").textContent = snapshot
+														.val().name
+														+ "님 환영합니다!";
+												document
+														.getElementById("profileMenu1").textContent = "회원정보 확인";
+												document
+														.getElementById("profileMenu1").href = "profile.html";
+												document
+														.getElementById("profileMenu2").textContent = "로그아웃";
+												document
+														.getElementById("profileMenu2").href = "logout.html";
 
-        		}
-        		else {
-        			document.getElementById("profileMain").textContent = "로그인 & 회원가입"
-            		document.getElementById("profileMenu1").textContent = "로그인";
-            		document.getElementById("profileMenu1").href = "login.html";
-            		document.getElementById("profileMenu2").textContent = "회원가입";
-            		document.getElementById("profileMenu2").href = "create_account.html";
-             		return false
-        		}
-      		});
-    	}
+												return true
+											});
 
+						} else {
+							document.getElementById("profileMain").textContent = "로그인 & 회원가입"
+							document.getElementById("profileMenu1").textContent = "로그인";
+							document.getElementById("profileMenu1").href = "login.html";
+							document.getElementById("profileMenu2").textContent = "회원가입";
+							document.getElementById("profileMenu2").href = "create_account.html";
+							return false
+						}
+					});
+		}
 	</script>
-	<nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
+	<nav
+		class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
 		<div class="container">
 			<div class="navbar-translate">
 				<a class="navbar-brand" href="index.html"> Gachon Honey BEE </a>
-
 				<nav class="navbar fixed-top navbar-light bg-warning">
 					<div class="container">
 						<button class="navbar-toggler" type="button"
@@ -134,40 +143,31 @@ function goReplace(flag,type){
 						<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 							<a class="navbar-brand" href="index.html">Gachon Honey BEE</a>
 							<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-								<li class="nav-item">
-									<a class="nav-link disabled" href="index.html">Home
-									</a>
-								</li>
-								<li class="nav-item active">
-									<a class="nav-link" href="">Study Room <span class="sr-only">(current)</span>
-									</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link disabled" href="Restaurant_list.html">Restaurant
-									</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link disabled" href="SchoolFood_index.html">School food
-									</a>
-								</li>
+								<li class="nav-item"><a class="nav-link disabled"
+									href="index.html">Home </a></li>
+								<li class="nav-item active"><a class="nav-link" href="">Study
+										Room <span class="sr-only">(current)</span>
+								</a></li>
+								<li class="nav-item"><a class="nav-link disabled"
+									href="Restaurant_list.html">Restaurant </a></li>
+								<li class="nav-item"><a class="nav-link disabled"
+									href="SchoolFood_index.html">School food </a></li>
 							</ul>
 						</div>
 
 						<!-- login or out based on firebase -->
 						<div class="collapse navbar-collapse">
-        					<ul class="navbar-nav ml-auto">
-          						<li class="dropdown nav-item">
-            						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" id="profileMain">
-              							
-            						</a>
-            						<div class="dropdown-menu dropdown-with-icons">
-              							<a href="" class="dropdown-item" id="profileMenu1"></a>
-              							<a href="" class="dropdown-item" id="profileMenu2"></a>
-            						</div>
-          						</li>
-          
-        					</ul>
-      					</div>
+							<ul class="navbar-nav ml-auto">
+								<li class="dropdown nav-item"><a href="#"
+									class="dropdown-toggle nav-link" data-toggle="dropdown"
+									id="profileMain"> </a>
+									<div class="dropdown-menu dropdown-with-icons">
+										<a href="" class="dropdown-item" id="profileMenu1"></a> <a
+											href="" class="dropdown-item" id="profileMenu2"></a>
+									</div></li>
+
+							</ul>
+						</div>
 
 					</div>
 				</nav>
@@ -179,7 +179,7 @@ function goReplace(flag,type){
 		<div class="masthead-content">
 			<div class="container">
 				<h1 class="masthead-heading mb-0">Study Room</h1>
-				
+
 			</div>
 		</div>
 		<div class="bg-circle-1 bg-circle"></div>
@@ -189,24 +189,30 @@ function goReplace(flag,type){
 	</header>
 	<!-- Page Content -->
 	<div class="container">
-		
+
 		<!-- Related Projects Row -->
-		<h1 class="my-4"><small>List of</small> Study Room</h1>
+		<h1 class="my-4">
+			<small>List of</small> Study Room
+		</h1>
 
 		<div class="section text-center" id="school_food">
-			
+
 			<table align="center">
-				<br><h2>비전타워 지하 1층</h2><br>
+				<br>
+				<h2>비전타워 지하 1층</h2>
+				<br>
 				<tr>
 					<td>
 						<div class="card" style="width: 20rem; margin-right: 25px;">
 							<img class="card-img-top" src="assets/img/eureka.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
-								style="cursor:pointer;">
+								style="cursor: pointer;">
 							<div class="card-body">
 								<p class="card-text">
-									<h5><b>유레카 (Eureka)</b></h5>
-									<b>위치		: </b>중앙도서관 1층<br>
+								<h5>
+									<b>유레카 (Eureka)</b>
+								</h5>
+								<b>위치 : </b>중앙도서관 1층<br>
 								</p>
 							</div>
 						</div>
@@ -215,11 +221,13 @@ function goReplace(flag,type){
 						<div class="card" style="width: 20rem; margin-right: 25px;">
 							<img class="card-img-top" src="assets/img/ragom.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
-								style="cursor:pointer;">
+								style="cursor: pointer;">
 							<div class="card-body">
 								<p class="card-text">
-									<h5><b>라곰</b></h5>
-									<b>위치		: </b>가천관 1층 로비<br>
+								<h5>
+									<b>라곰</b>
+								</h5>
+								<b>위치 : </b>가천관 1층 로비<br>
 								</p>
 							</div>
 						</div>
@@ -228,18 +236,20 @@ function goReplace(flag,type){
 						<div class="card" style="width: 20rem; margin-right: 25px;">
 							<img class="card-img-top" src="assets/img/global_zone.jpg"
 								alt="Card image cap" onclick="javascript:location.href=' ';"
-								style="cursor:pointer;">
+								style="cursor: pointer;">
 							<div class="card-body">
 								<p class="card-text">
-									<h5><b>글로벌존</b></h5>
-									<b>위치		: </b>전자정보도서관 지하1층<br>
+								<h5>
+									<b>글로벌존</b>
+								</h5>
+								<b>위치 : </b>전자정보도서관 지하1층<br>
 								</p>
 							</div>
 						</div>
 					</td>
 				</tr>
 			</table>
-			
+
 		</div>
 		<!-- /.row -->
 

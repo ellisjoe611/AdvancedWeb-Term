@@ -32,19 +32,31 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
-      <div class="collapse navbar-collapse">
+       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-          
+          <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+              <i class="material-icons">apps</i> Menu
+            </a>
+            <div class="dropdown-menu dropdown-with-icons">
+              <a href="index.html" class="dropdown-item">
+                All Components
+              </a>
+              <a href="https://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
+                Documentation
+              </a>
+            </div>
+          </li>
           <li class="dropdown nav-item">
             <a href="#pablo" class="profile-photo dropdown-toggle nav-link" data-toggle="dropdown">
-              <div class="profile-photo-small">
+             <div class="profile-photo-small">
                 <img src="./assets/img/faces/avatar.jpg" alt="Circle Image" class="rounded-circle img-fluid">
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
               <h6 class="dropdown-header">사용자 메뉴</h6>
                 <a href="edit_account.html" class="dropdown-item">회원정보 수정</a>
-                <a href="#pablo" class="dropdown-item">탈퇴하기...</a>
+                <a href="delete_account.html" class="dropdown-item">탈퇴하기...</a>
                 <a href="logout.html" class="dropdown-item">로그아웃</a>
             </div>
           </li>
@@ -88,9 +100,6 @@
         
       </div>
     </div>
-    <center>
-    	
-    </center>
   </div>
 
 
@@ -110,7 +119,7 @@
           &copy;
           <script>
             document.write(new Date().getFullYear())
-          </script>, Gachon Honey Bee, original by Creative Tim</a>
+          </script>, Gachon Honey Bee</a>
         </div>
       </div>
     </footer>

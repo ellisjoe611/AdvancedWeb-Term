@@ -25,16 +25,21 @@ h5, h4, h1 {
 	font-family: 'Jua', sans-sarif
 }
 
-label{
-font-family:'Jua', sans-sarif;
-color: black;
+label {
+	font-family: 'Jua', sans-sarif;
+	color: black;
 }
 </style>
 
 <script type="text/javascript">
-function goReplace(flag,type){	
-	location.href='board.html?flag='+flag+'&type='+type;
-}
+	function goReplace(flag, type) {
+		location.href = 'board.html?flag=' + flag + '&type=' + type;
+	}
+
+	function setType(type) {
+		var address = "http://www.gachon.ac.kr/etc/food.jsp?gubun=" + type;
+		return address;
+	}
 </script>
 
 </head>
@@ -43,58 +48,68 @@ function goReplace(flag,type){
 	<!--get session form Firebase-->
 	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 	<script>
-  		// Initialize Firebase
-  		var config = {
-    		apiKey: "AIzaSyAKsZQ8RnJ-8Ax_yJ8iqUVqMaapAhYwjv8",
-    		authDomain: "gachon-honey-bee.firebaseapp.com",
-    		databaseURL: "https://gachon-honey-bee.firebaseio.com",
-    		projectId: "gachon-honey-bee",
-    		storageBucket: "gachon-honey-bee.appspot.com",
-    		messagingSenderId: "946258217070"
-  		};
-  		firebase.initializeApp(config);
-  		firebaseEmailAuth = firebase.auth();
-  		firebaseDatabase = firebase.database();
+		// Initialize Firebase
+		var config = {
+			apiKey : "AIzaSyAKsZQ8RnJ-8Ax_yJ8iqUVqMaapAhYwjv8",
+			authDomain : "gachon-honey-bee.firebaseapp.com",
+			databaseURL : "https://gachon-honey-bee.firebaseio.com",
+			projectId : "gachon-honey-bee",
+			storageBucket : "gachon-honey-bee.appspot.com",
+			messagingSenderId : "946258217070"
+		};
+		firebase.initializeApp(config);
+		firebaseEmailAuth = firebase.auth();
+		firebaseDatabase = firebase.database();
 
-  		var userId;
-  		//세션 체크 함수 시작하기!
-    	userSessionCheck();
+		var userId;
+		//세션 체크 함수 시작하기!
+		userSessionCheck();
 
+		//유저가 로그인 했는지 안했는지 확인해주는 함수
+		function userSessionCheck() {
 
-    	//유저가 로그인 했는지 안했는지 확인해주는 함수
-    	function userSessionCheck() {
-      
-      		//로그인이 되어있으면 - 유저가 있으면, user를 인자값으로 넘겨준다.
-      		firebaseEmailAuth.onAuthStateChanged(function (user) {
-        		if(user) {
-          			//조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
-          			userId = firebaseEmailAuth.currentUser.uid;
-          			firebaseDatabase.ref("/users/" + userId).once('value').then(function (snapshot) {
-          				//자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
-            			document.getElementById("profileMain").textContent = snapshot.val().name + "님 환영합니다!";
-            			document.getElementById("profileMenu1").textContent = "회원정보 확인";
-            			document.getElementById("profileMenu1").href = "profile.html";
-            			document.getElementById("profileMenu2").textContent = "로그아웃";
-            			document.getElementById("profileMenu2").href = "logout.html";
-            
-            			return true
-          			});
+			//로그인이 되어있으면 - 유저가 있으면, user를 인자값으로 넘겨준다.
+			firebaseEmailAuth
+					.onAuthStateChanged(function(user) {
+						if (user) {
+							//조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+							userId = firebaseEmailAuth.currentUser.uid;
+							firebaseDatabase
+									.ref("/users/" + userId)
+									.once('value')
+									.then(
+											function(snapshot) {
+												//자바스크립트 dom 선택자를 통해서 네비게이션 메뉴의 엘리먼트 변경해주기
+												document
+														.getElementById("profileMain").textContent = snapshot
+														.val().name
+														+ "님 환영합니다!";
+												document
+														.getElementById("profileMenu1").textContent = "회원정보 확인";
+												document
+														.getElementById("profileMenu1").href = "profile.html";
+												document
+														.getElementById("profileMenu2").textContent = "로그아웃";
+												document
+														.getElementById("profileMenu2").href = "logout.html";
 
-        		}
-        		else {
-        			document.getElementById("profileMain").textContent = "로그인 & 회원가입"
-            		document.getElementById("profileMenu1").textContent = "로그인";
-            		document.getElementById("profileMenu1").href = "login.html";
-            		document.getElementById("profileMenu2").textContent = "회원가입";
-            		document.getElementById("profileMenu2").href = "create_account.html";
-             		return false
-        		}
-      		});
-    	}
+												return true
+											});
 
+						} else {
+							document.getElementById("profileMain").textContent = "로그인 & 회원가입"
+							document.getElementById("profileMenu1").textContent = "로그인";
+							document.getElementById("profileMenu1").href = "login.html";
+							document.getElementById("profileMenu2").textContent = "회원가입";
+							document.getElementById("profileMenu2").href = "create_account.html";
+							return false
+						}
+					});
+		}
 	</script>
 
-	<nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
+	<nav
+		class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg">
 		<div class="container">
 			<div class="navbar-translate">
 				<a class="navbar-brand" href="index.html"> Gachon Honey BEE </a>
@@ -115,8 +130,8 @@ function goReplace(flag,type){
 								<li class="nav-item active"><a class="nav-link"
 									href="index.html">Home <span class="sr-only">(current)</span>
 								</a></li>
-								<li class="nav-item"><a class="nav-link" href="StudyRoom_list.html">Study
-										Room</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="StudyRoom_list.html">Study Room</a></li>
 								<li class="nav-item"><a class="nav-link disabled"
 									href="Restaurant_list.html">Restaurant</a></li>
 								<li class="nav-item"><a class="nav-link disabled"
@@ -126,19 +141,17 @@ function goReplace(flag,type){
 
 						<!-- login or out based on firebase -->
 						<div class="collapse navbar-collapse">
-        					<ul class="navbar-nav ml-auto">
-          						<li class="dropdown nav-item">
-            						<a id="profileMain" href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              							
-            						</a>
-            						<div class="dropdown-menu dropdown-with-icons">
-              							<a id="profileMenu1" href="" class="dropdown-item">Sign in</a>
-              							<a id="profileMenu2" href="" class="dropdown-item">Create Account</a>
-            						</div>
-          						</li>
-          
-        					</ul>
-      					</div>
+							<ul class="navbar-nav ml-auto">
+								<li class="dropdown nav-item"><a id="profileMain" href="#"
+									class="dropdown-toggle nav-link" data-toggle="dropdown"> </a>
+									<div class="dropdown-menu dropdown-with-icons">
+										<a id="profileMenu1" href="" class="dropdown-item">Sign in</a>
+										<a id="profileMenu2" href="" class="dropdown-item">Create
+											Account</a>
+									</div></li>
+
+							</ul>
+						</div>
 
 					</div>
 				</nav>
@@ -159,11 +172,12 @@ function goReplace(flag,type){
 						<label for="disabledTextInput"></label>
 						<table>
 							<tr>
-								<td><input type="text" id="search" class="form-control"
-									placeholder="Search"></td>
+								<td><input type="text" id="searchQuery"
+									class="form-control" placeholder="Search" value=""></td>
 								<td>
 									<button type="submit"
-										class="btn btn-white btn-just-icon btn-round">
+										class="btn btn-white btn-just-icon btn-round"
+										onclick="startSearch()">
 										<i class="material-icons">search</i>
 									</button>
 								</td>
@@ -202,7 +216,8 @@ function goReplace(flag,type){
 				<h5>가천대학교 내에 유용한 스터디룸들을 소개합니다. 다양한 과의 학생들과 후기를 나눌 수 있고, 평점도 매길
 					수 있습니다.</h5>
 				<a href="StudyRoom_list.html" class="badge badge-pill badge-default"
-					style="width: 100px; height:30px"><label class="text-center" style="margin-top:5px">더보기</label></a>
+					style="width: 100px; height: 30px"><label class="text-center"
+					style="margin-top: 5px">더보기</label></a>
 				<table align="center">
 					<tr>
 						<td>
@@ -212,8 +227,9 @@ function goReplace(flag,type){
 									alt="Card image cap">
 								<div class="card-body">
 									<p class="card-text">
-
-										<h5><b>라곰</b></h5>
+									<h5>
+										<b>라곰</b>
+									</h5>
 									가천관 1층 로비에 위치한 <b>라곰(Ragom)</b>입니다. 휴식을 위한 아늑한 쇼파와 공부를 위한 편안한
 									테이블과 의자들이 놓여있습니다.<br>
 									</p>
@@ -223,7 +239,7 @@ function goReplace(flag,type){
 						</td>
 						<td>
 							<div class="card" style="width: 20rem; margin-right: 25px;"
-							onclick="goReplace('1','study')">
+								onclick="goReplace('1','study')">
 								<img class="card-img-top" src="assets/img/eureka.jpg"
 									alt="Card image cap">
 								<div class="card-body">
@@ -238,7 +254,8 @@ function goReplace(flag,type){
 							</div>
 						</td>
 						<td>
-							<div class="card" style="width: 20rem;" onclick="goReplace('2','study')">
+							<div class="card" style="width: 20rem;"
+								onclick="goReplace('2','study')">
 								<img class="card-img-top" src="assets/img/global_zone.jpg"
 									alt="Card image cap">
 								<div class="card-body">
@@ -261,13 +278,15 @@ function goReplace(flag,type){
 					가천대학교 내에 맛있는 음식점들을 소개합니다.<br> 비전타워 또는 가천관 지하 1층에 위치한 음식점들이며,
 					다양한 후기 또한 살펴보실 수 있습니다.
 				</h5>
-				<a href="Restaurant_list.html" class="badge badge-pill badge-default"
-					style="width: 100px; height:30px"><label class="text-center" style="margin-top:5px">더보기</label></a>
+				<a href="Restaurant_list.html"
+					class="badge badge-pill badge-default"
+					style="width: 100px; height: 30px"><label class="text-center"
+					style="margin-top: 5px">더보기</label></a>
 				<table align="center">
 					<tr>
 						<td>
-							<div class="card" style="width: 20rem; margin-right: 25px;" 
-							onclick="goReplace('0','restaurant')">
+							<div class="card" style="width: 20rem; margin-right: 25px;"
+								onclick="goReplace('0','restaurant')">
 								<img class="card-img-top" src="assets/img/Res_sincup.jpg"
 									alt="Card image cap">
 								<div class="card-body">
@@ -282,7 +301,8 @@ function goReplace(flag,type){
 							</div>
 						</td>
 						<td>
-							<div class="card" style="width: 20rem; margin-right: 25px;" onclick="goReplace('1','restaurant')">
+							<div class="card" style="width: 20rem; margin-right: 25px;"
+								onclick="goReplace('1','restaurant')">
 								<img class="card-img-top" src="assets/img/Res_bongus.jpg"
 									alt="Card image cap">
 								<div class="card-body">
@@ -297,7 +317,8 @@ function goReplace(flag,type){
 							</div>
 						</td>
 						<td>
-							<div class="card" style="width: 20rem;" onclick="goReplace('2','restaurant')">
+							<div class="card" style="width: 20rem;"
+								onclick="goReplace('2','restaurant')">
 								<img class="card-img-top" src="assets/img/Res_tomato.jpg"
 									alt="Card image cap">
 								<div class="card-body">
@@ -324,7 +345,8 @@ function goReplace(flag,type){
 			<table align="center">
 				<tr>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							data-toggle="modal" data-target="#visionTowerSF">
 							<img class="card-img-top" src="assets/img/cafeteria_vision.jpg"
 								alt="Card image cap">
 							<div class="card-body">
@@ -337,7 +359,8 @@ function goReplace(flag,type){
 							</div>
 						</div>
 					<td>
-						<div class="card" style="width: 20rem; margin-right: 25px;">
+						<div class="card" style="width: 20rem; margin-right: 25px;"
+							data-toggle="modal" data-target="#changjoGuanSF">
 							<img class="card-img-top" src="assets/img/cafeteria_chang.jpg"
 								alt="Card image cap">
 							<div class="card-body">
@@ -351,7 +374,8 @@ function goReplace(flag,type){
 						</div>
 					</td>
 					<td>
-						<div class="card" style="width: 20rem;">
+						<div class="card" style="width: 20rem;" data-toggle="modal"
+							data-target="#AreumGuanSF">
 							<img class="card-img-top" src="assets/img/cafeteria_arm.jpg"
 								alt="Card image cap">
 							<div class="card-body">
@@ -368,26 +392,77 @@ function goReplace(flag,type){
 			</table>
 		</div>
 	</div>
-
-	<footer class="footer footer-default">
-		<div class="container">
-			<nav class="float-left">
-				<ul>
-					<li><a href="https://www.creative-tim.com/"> Creative Tim
-					</a></li>
-				</ul>
-			</nav>
-			<div class="copyright float-right">
-				&copy;
-				<script>
-					document.write(new Date().getFullYear())
-				</script>
-				, made with <i class="material-icons">favorite</i> by <a
-					href="https://www.creative-tim.com/" target="blank">Creative
-					Tim</a> for a better web.
+	<!-- visionTower SchoolFood Modal -->
+	<div class="modal fade" id="visionTowerSF" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document"
+			style="max-width: 100%; width: auto; display: table;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="visionTowerSFTitle">"비전타워 학식"</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<iframe src="http://www.gachon.ac.kr/etc/food.jsp?gubun=C"
+						style="display: block; width: 800px; height: 100vh"></iframe>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
 			</div>
 		</div>
-	</footer>
+	</div>
+
+	<!-- changjoGuan SchoolFood Modal -->
+	<div class="modal fade" id="changjoGuanSF" tabindex="-1" role="dialog"
+		aria-labelledby="changjoGuanSFTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document"
+			style="max-width: 100%; width: auto; display: table;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="changjoGuanSFTitle">"창조관 학식"</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<iframe src="http://www.gachon.ac.kr/etc/food.jsp?gubun=A"
+						style="display: block; width: 800px; height: 100vh"></iframe>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- changjoGuan SchoolFood Modal -->
+	<div class="modal fade" id="AreumGuanSF" tabindex="-1" role="dialog"
+		aria-labelledby="AreumGuanSFTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document"
+			style="max-width: 100%; width: auto; display: table;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="AreumGuanSFTitle">"아름관 학식"</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<iframe src="http://www.gachon.ac.kr/etc/food.jsp?gubun=B"
+						style="display: block; width: 800px; height: 100vh"></iframe>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!--   Core JS Files   -->
 	<script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
@@ -409,4 +484,50 @@ function goReplace(flag,type){
 	<!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
 	<script src="assets/js/material-kit.js?v=2.0.4" type="text/javascript"></script>
 
+	<!--검색 시작!-->
+	<script>
+		function startSearch() {
+			var query = document.getElementById("searchQuery").value;
+
+			var xmlhttp = new XMLHttpRequest();
+			var url = "data.json";
+			var temp = "";
+			var flag = "";
+			var type = "";
+
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var arr = JSON.parse(xmlhttp.responseText);
+
+					searchPlace(arr.studyroom, arr.restaurant);
+
+				}
+			}
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();
+
+			function searchPlace(arr_studyroom, arr_restaurant) {
+				var isFound = false;
+
+				for (var i = 0; i < arr_studyroom.length; i++) {
+					if (arr_studyroom[i].name.includes(query)) {
+						window.location.href = "board.html?flag=" + i
+								+ "&type=studyroom";
+						isFound = true;
+					}
+				}
+				for (var j = 0; j < arr_restaurant.length; j++) {
+					if (arr_restaurant[j].name.includes(query)) {
+						window.location.href = "board.html?flag=" + j
+								+ "&type=restaurant";
+						isFound = true;
+					}
+				}
+
+				if (isFound == false) {
+					alert(query + "를 못찾았습니다...");
+				}
+			}
+		}
+	</script>
 </html>
